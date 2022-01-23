@@ -161,11 +161,7 @@ Config.ArmorDamage = 5
 ]]
 Config.MaxInjuryChanceMulti = 3
 Config.ForceInjury = 35
-<<<<<<< HEAD
 Config.AlwaysBleedChance = 20
-=======
-Config.AlwaysBleedChance = 70
->>>>>>> b020f9f37001bee018fb23076bdef7eaa8796758
 
 --[[
     Message Timer : How long it will take to display limb/bleed message
