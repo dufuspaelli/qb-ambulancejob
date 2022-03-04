@@ -6,7 +6,7 @@ local painkillerAmount = 0
 
 local function DoBleedAlert()
     if not isDead and tonumber(isBleeding) > 0 then
-        QBCore.Functions.Notify("You are "..Config.BleedingStates[tonumber(isBleeding)].label, "error", 5000)
+       -- QBCore.Functions.Notify("You are "..Config.BleedingStates[tonumber(isBleeding)].label, "error", 5000)
     end
 end
 
@@ -164,12 +164,12 @@ CreateThread(function()
                     if isBleeding > 0 then
                         if fadeOutTimer + 1 == Config.FadeOutTimer then
                             if blackoutTimer + 1 == Config.BlackoutTimer then
-                                SetFlash(0, 0, 100, 7000, 100)
+                               -- SetFlash(0, 0, 100, 7000, 100)
 
-                                DoScreenFadeOut(500)
+                                --[[ DoScreenFadeOut(500)
                                 while not IsScreenFadedOut() do
                                     Wait(0)
-                                end
+                                end ]]
 
                                 if not IsPedRagdoll(player) and IsPedOnFoot(player) and not IsPedSwimming(player) then
                                     ShakeGameplayCam('SMALL_EXPLOSION_SHAKE', 0.08) -- change this float to increase/decrease camera shake
@@ -177,14 +177,14 @@ CreateThread(function()
                                 end
 
                                 Wait(1500)
-                                DoScreenFadeIn(1000)
+                               -- DoScreenFadeIn(1000)
                                 blackoutTimer = 0
                             else
-                                DoScreenFadeOut(500)
+                               --[[  DoScreenFadeOut(500)
                                 while not IsScreenFadedOut() do
                                     Wait(0)
                                 end
-                                DoScreenFadeIn(500)
+                                DoScreenFadeIn(500) ]]
 
                                 if isBleeding > 3 then
                                     blackoutTimer = blackoutTimer + 2
