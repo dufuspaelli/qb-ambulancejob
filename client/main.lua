@@ -671,7 +671,10 @@ end)
 RegisterNetEvent('hospital:client:RespawnAtHospital', function()
     TriggerServerEvent("hospital:server:RespawnAtHospital")
     if exports["qb-policejob"]:IsHandcuffed() then
-        TriggerEvent("police:client:GetCuffed", -1)
+        -- send to prison here 
+        --  TriggerEvent("police:client:SendToJail", Player.metadata.jailTime)
+        TriggerEvent("police:client:SendToJail", 1)
+       -- TriggerEvent("police:client:GetCuffed", -1)
     end
     TriggerEvent("police:client:DeEscort")
 end)
