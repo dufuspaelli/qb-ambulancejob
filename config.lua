@@ -1,7 +1,7 @@
 Config = {}
 
 Config.MinimalDoctors = 2
-Config.WipeInventoryOnRespawn = true
+Config.WipeInventoryOnRespawn = false
 
 Config.Locations = {
     ["checking"] = {
@@ -134,7 +134,7 @@ Config.Items = {
 }
 
 Config.BillCost = 2000
-Config.DeathTime = 300
+Config.DeathTime = 0
 Config.CheckTime = 10
 
 Config.PainkillerInterval = 60 -- seconds
@@ -146,7 +146,7 @@ Config.PainkillerInterval = 60 -- seconds
     RegenRate :
 ]]
 Config.MaxHp = 200
-Config.RegenRate = 0.0
+Config.RegenRate = 1.0
 
 --[[
     HealthDamage : How Much Damage To Direct HP Must Be Applied Before Checks For Damage Happens
@@ -171,33 +171,33 @@ Config.MessageTimer = 12
 --[[
     AIHealTimer : How long it will take to be healed after checking in, in seconds
 ]]
-Config.AIHealTimer = 20
+Config.AIHealTimer = 1
 
 --[[
     BleedTickRate : How much time, in seconds, between bleed ticks
 ]]
-Config.BleedTickRate = 30
+Config.BleedTickRate = 300
 
 --[[
     BleedMovementTick : How many seconds is taken away from the bleed tick rate if the player is walking, jogging, or sprinting
     BleedMovementAdvance : How Much Time Moving While Bleeding Adds (This Adds This Value To The Tick Count, Meaing The Above BleedTickRate Will Be Reached Faster)
 ]]
 Config.BleedMovementTick = 10
-Config.BleedMovementAdvance = 3
+Config.BleedMovementAdvance = 0
 
 --[[
     The Base Damage That Is Multiplied By Bleed Level Every Time A Bleed Tick Occurs
 ]]
-Config.BleedTickDamage = 8
+Config.BleedTickDamage = 1
 
 --[[
     FadeOutTimer : How many bleed ticks occur before fadeout happens
     BlackoutTimer : How many bleed ticks occur before blacking out
     AdvanceBleedTimer : How many bleed ticks occur before bleed level increases
 ]]
-Config.FadeOutTimer = 2
-Config.BlackoutTimer = 10
-Config.AdvanceBleedTimer = 10
+Config.FadeOutTimer = 20
+Config.BlackoutTimer = 100
+Config.AdvanceBleedTimer = 100
 
 --[[
     HeadInjuryTimer : How much time, in seconds, do head injury effects chance occur
