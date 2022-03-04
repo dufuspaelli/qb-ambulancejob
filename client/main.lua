@@ -100,7 +100,7 @@ local function DoLimbAlert()
             else
                 limbDamageMsg = Lang:t('info.many_places')
             end
-            QBCore.Functions.Notify(limbDamageMsg, "primary")
+            --QBCore.Functions.Notify(limbDamageMsg, "primary")
         end
     end
 end
@@ -603,7 +603,7 @@ RegisterNetEvent('hospital:client:Revive', function()
     TriggerServerEvent("hospital:server:SetDeathStatus", false)
     TriggerServerEvent("hospital:server:SetLaststandStatus", false)
     emsNotified = false
-    QBCore.Functions.Notify(Lang:t('info.healthy'))
+    --QBCore.Functions.Notify(Lang:t('info.healthy'))
 end)
 
 RegisterNetEvent('hospital:client:SetPain', function()
@@ -645,7 +645,7 @@ RegisterNetEvent('hospital:client:HealInjuries', function(type)
         ResetPartial()
     end
     TriggerServerEvent("hospital:server:RestoreWeaponDamage")
-    QBCore.Functions.Notify(Lang:t('success.wounds_healed'), 'success')
+    --QBCore.Functions.Notify(Lang:t('success.wounds_healed'), 'success')
 end)
 
 RegisterNetEvent('hospital:client:SendToBed', function(id, data, isRevive)
@@ -655,7 +655,7 @@ RegisterNetEvent('hospital:client:SendToBed', function(id, data, isRevive)
     CreateThread(function ()
         Wait(5)
         if isRevive then
-            QBCore.Functions.Notify(Lang:t('success.being_helped'), 'success')
+           -- QBCore.Functions.Notify(Lang:t('success.being_helped'), 'success')
             Wait(Config.AIHealTimer * 1000)
             TriggerEvent("hospital:client:Revive")
         else
@@ -669,13 +669,20 @@ RegisterNetEvent('hospital:client:SetBed', function(id, isTaken)
 end)
 
 RegisterNetEvent('hospital:client:RespawnAtHospital', function()
-    TriggerServerEvent("hospital:server:RespawnAtHospital")
-    if exports["qb-policejob"]:IsHandcuffed() then
-        -- send to prison here 
-        --  TriggerEvent("police:client:SendToJail", Player.metadata.jailTime)
-        TriggerEvent("police:client:SendToJail", 1)
-       -- TriggerEvent("police:client:GetCuffed", -1)
-    end
+    QBCore.Functions.TriggerCallback('qb-cnr:server:getWantedLevel', function(wantedLvl)
+		--print("wanted level from server: " .. wantedLvl)
+		if wantedLvl > 2 then 
+                --  TriggerEvent("police:client:SendToJail", Player.metadata.jailTime)
+            TriggerEvent("police:client:SendToJail", 1)
+            TriggerEvent('hospital:client:Revive', -1)
+            TriggerServerEvent("setWantedLevel", 0)
+       
+        else 
+            TriggerServerEvent("hospital:server:RespawnAtHospital") 
+            local serverId = GetPlayerServerId(PlayerId())
+            TriggerEvent("police:client:GetCuffed", serverId, false)
+        end
+	end)
     TriggerEvent("police:client:DeEscort")
 end)
 
