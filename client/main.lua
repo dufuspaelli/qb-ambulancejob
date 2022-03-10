@@ -671,16 +671,19 @@ end)
 RegisterNetEvent('hospital:client:RespawnAtHospital', function()
     QBCore.Functions.TriggerCallback('qb-cnr:server:getWantedLevel', function(wantedLvl)
 		--print("wanted level from server: " .. wantedLvl)
-		if wantedLvl > 2 then 
+        local jailTime = QBCore.Functions.GetPlayerData().metadata.injail
+        print("jailtime was.." .. jailTime)
+		if wantedLvl > 2 or jailTime > 0 then 
                 --  TriggerEvent("police:client:SendToJail", Player.metadata.jailTime)
-            TriggerEvent("police:client:SendToJail", 1)
+      
+           
             TriggerEvent('hospital:client:Revive', -1)
             TriggerServerEvent("setWantedLevel", 0)
+            TriggerEvent("police:client:SendToJail", jailTime)
+
        
         else 
             TriggerServerEvent("hospital:server:RespawnAtHospital") 
-            local serverId = GetPlayerServerId(PlayerId())
-            TriggerEvent("police:client:GetCuffed", serverId, false)
         end
 	end)
     TriggerEvent("police:client:DeEscort")
