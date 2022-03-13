@@ -135,7 +135,7 @@ Config.Items = {
 
 Config.BillCost = 2000
 Config.DeathTime = 0
-Config.CheckTime = 10
+Config.CheckTime = 1
 
 Config.PainkillerInterval = 60 -- seconds
 

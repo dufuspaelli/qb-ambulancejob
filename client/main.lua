@@ -671,6 +671,7 @@ end)
 RegisterNetEvent('hospital:client:RespawnAtHospital', function()
     QBCore.Functions.TriggerCallback('qb-cnr:server:getWantedLevel', function(wantedLvl)
 		--print("wanted level from server: " .. wantedLvl)
+
         local jailTime = QBCore.Functions.GetPlayerData().metadata.injail
         print("jailtime was.." .. jailTime)
 		if wantedLvl > 2 or jailTime > 0 then 
@@ -683,10 +684,15 @@ RegisterNetEvent('hospital:client:RespawnAtHospital', function()
 
        
         else 
+            TriggerEvent("prison:client:UnjailPersonToHospital")
+            TriggerServerEvent("qb-clothes:loadPlayerSkin")
+            Wait(2500)
+            
             TriggerServerEvent("hospital:server:RespawnAtHospital") 
+           
         end
 	end)
-    TriggerEvent("police:client:DeEscort")
+   -- TriggerEvent("police:client:DeEscort")
 end)
 
 RegisterNetEvent('hospital:client:SendBillEmail', function(amount)
