@@ -51,6 +51,8 @@ function OnDeath()
                 loadAnimDict(deadAnimDict)
                 TaskPlayAnim(player, deadAnimDict, deadAnim, 1.0, 1.0, -1, 1, 0, 0, 0, 0)
             end
+            local netPed = PedToNet(ped)
+            TriggerServerEvent("qb-cnr:toggleDead", netPed, true)
             TriggerServerEvent('hospital:server:ambulanceAlert', Lang:t('info.civ_died'))
         end
     end
@@ -62,12 +64,13 @@ function DeathTimer()
         Wait(1000)
         deathTime = deathTime - 1
         if deathTime <= 0 then
-            if IsControlPressed(0, 38) and hold <= 0 and not isInHospitalBed then
+            if IsControlPressed(0, 38) and hold == 0 and not isInHospitalBed then
                 TriggerEvent("hospital:client:RespawnAtHospital")
+                Wait(2000)
                 hold = 5
             end
             if IsControlPressed(0, 38) then
-                if hold - 1 >= 0 then
+                if hold - 1 > 0 then
                     hold = hold - 1
                 else
                     hold = 0
