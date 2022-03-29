@@ -133,7 +133,7 @@ Config.Items = {
     }
 }
 
-Config.BillCost = 2000
+Config.BillCost = 500
 Config.DeathTime = 0
 Config.CheckTime = 1
 
@@ -160,7 +160,7 @@ Config.ArmorDamage = 5
     ForceInjury : Maximum amount of damage a player can take before limb damage & effects are forced to occur
 ]]
 Config.MaxInjuryChanceMulti = 3
-Config.ForceInjury = 35
+Config.ForceInjury = 75
 Config.AlwaysBleedChance = 20
 
 --[[
@@ -182,7 +182,7 @@ Config.BleedTickRate = 300
     BleedMovementTick : How many seconds is taken away from the bleed tick rate if the player is walking, jogging, or sprinting
     BleedMovementAdvance : How Much Time Moving While Bleeding Adds (This Adds This Value To The Tick Count, Meaing The Above BleedTickRate Will Be Reached Faster)
 ]]
-Config.BleedMovementTick = 10
+Config.BleedMovementTick = 0
 Config.BleedMovementAdvance = 0
 
 --[[
@@ -195,8 +195,8 @@ Config.BleedTickDamage = 1
     BlackoutTimer : How many bleed ticks occur before blacking out
     AdvanceBleedTimer : How many bleed ticks occur before bleed level increases
 ]]
-Config.FadeOutTimer = 20
-Config.BlackoutTimer = 100
+Config.FadeOutTimer = 2000
+Config.BlackoutTimer = 1000
 Config.AdvanceBleedTimer = 100
 
 --[[
@@ -204,14 +204,14 @@ Config.AdvanceBleedTimer = 100
     ArmInjuryTimer : How much time, in seconds, do arm injury effects chance occur
     LegInjuryTimer : How much time, in seconds, do leg injury effects chance occur
 ]]
-Config.HeadInjuryTimer = 30
-Config.ArmInjuryTimer = 30
-Config.LegInjuryTimer = 15
+Config.HeadInjuryTimer = 60
+Config.ArmInjuryTimer = 60
+Config.LegInjuryTimer = 60
 
 --[[
     The Chance, In Percent, That Certain Injury Side-Effects Get Applied
 ]]
-Config.HeadInjuryChance = 25
+Config.HeadInjuryChance = 0
 Config.ArmInjuryChance = 25
 Config.LegInjuryChance = {
     Running = 50,
