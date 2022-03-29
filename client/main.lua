@@ -670,19 +670,23 @@ end)
 
 RegisterNetEvent('hospital:client:RespawnAtHospital', function()
     QBCore.Functions.TriggerCallback('qb-cnr:server:getWantedLevel', function(wantedLvl)
-		--print("wanted level from server: " .. wantedLvl)
+		print("wanted level from server: " .. wantedLvl)
 
         local jailTime = QBCore.Functions.GetPlayerData().metadata.injail
         print("jailtime was.." .. jailTime)
 		if wantedLvl > 2 or jailTime > 0 then 
-                --  TriggerEvent("police:client:SendToJail", Player.metadata.jailTime)
-      
-           
             TriggerEvent('hospital:client:Revive', -1)
+            
+            if jailTime > 0 then 
+                TriggerEvent("police:client:SendToJail", jailTime)
+            else 
+                print("else triggered")
+                QBCore.Functions.TriggerCallback('qb-cnr:server:getWarrantLevel', function(warrant)
+                    print("warrant was:"..warrant)
+                    TriggerEvent("police:client:SendToJail", warrant)
+                end)
+            end
             TriggerServerEvent("setWantedLevel", 0)
-            TriggerEvent("police:client:SendToJail", jailTime)
-
-       
         else 
             TriggerEvent("prison:client:UnjailPersonToHospital")
             TriggerServerEvent("qb-clothes:loadPlayerSkin")
