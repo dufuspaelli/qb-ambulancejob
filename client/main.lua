@@ -691,7 +691,7 @@ RegisterNetEvent('hospital:client:RespawnAtHospital', function()
             TriggerEvent("prison:client:UnjailPersonToHospital")
             TriggerServerEvent("qb-clothes:loadPlayerSkin")
             Wait(2500)
-            
+            TriggerServerEvent("qb-cnr:toggleDead", netPed, false)
             TriggerServerEvent("hospital:server:RespawnAtHospital") 
            
         end
