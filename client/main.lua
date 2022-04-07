@@ -203,7 +203,7 @@ function ResetPartial()
     })
 end
 
-local function ResetAll()
+function ResetAll()
     isBleeding = 0
     bleedTickTimer = 0
     advanceBleedTimer = 0
@@ -430,9 +430,17 @@ end
 local function ProcessDamage(ped)
     if not isDead and not InLaststand and not onPainKillers then
         for k, v in pairs(injured) do
+
             if (v.part == 'LLEG' and v.severity > 1) or (v.part == 'RLEG' and v.severity > 1) or (v.part == 'LFOOT' and v.severity > 2) or (v.part == 'RFOOT' and v.severity > 2) then
+                if IsPedJumping(ped) then 
+                    print("triggered")
+                    Wait(300)
+                    ShakeGameplayCam('SMALL_EXPLOSION_SHAKE', 0.08) -- change this float to increase/decrease camera shake
+                    SetPedToRagdollWithFall(ped, 1500, 2000, 1, GetEntityForwardVector(ped), 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
+                end
                 if legCount >= Config.LegInjuryTimer then
                     if not IsPedRagdoll(ped) and IsPedOnFoot(ped) then
+
                         local chance = math.random(100)
                         if (IsPedRunning(ped) or IsPedSprinting(ped)) then
                             if chance <= Config.LegInjuryChance.Running then
@@ -627,10 +635,15 @@ RegisterNetEvent('hospital:client:KillPlayer', function()
 end)
 
 RegisterNetEvent('hospital:client:HealInjuries', function(type)
+    print("triggered heals")
     if type == "full" then
         ResetAll()
+        ResetPedMovementClipset(PlayerPedId(), 0.0)
+        SetPlayerSprint(PlayerId(), true)
     else
-        ResetPartial()
+        ResetAll()
+        ResetPedMovementClipset(PlayerPedId(), 0.0)
+        SetPlayerSprint(PlayerId(), true)
     end
     TriggerServerEvent("hospital:server:RestoreWeaponDamage")
     --QBCore.Functions.Notify(Lang:t('success.wounds_healed'), 'success')
@@ -852,6 +865,7 @@ CreateThread(function()
 
         if not isInHospitalBed then
             ProcessDamage(ped)
+
         end
         Wait(100)
     end
