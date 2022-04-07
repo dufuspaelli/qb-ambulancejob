@@ -109,7 +109,7 @@ end
 
 local function DoBleedAlert()
     if not isDead and tonumber(isBleeding) > 0 then
-        QBCore.Functions.Notify(Lang:t('info.bleed_alert', {bleedstate = Config.BleedingStates[tonumber(isBleeding)].label}), "error")
+        --QBCore.Functions.Notify(Lang:t('info.bleed_alert', {bleedstate = Config.BleedingStates[tonumber(isBleeding)].label}), "error")
     end
 end
 
