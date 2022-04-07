@@ -450,12 +450,12 @@ local function ProcessDamage(ped)
                         if (IsPedRunning(ped) or IsPedSprinting(ped)) then
                             if chance <= Config.LegInjuryChance.Running then
                                 ShakeGameplayCam('SMALL_EXPLOSION_SHAKE', 0.08) -- change this float to increase/decrease camera shake
-                                SetPedToRagdollWithFall(ped, 1500, 2000, 1, GetEntityForwardVector(ped), 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
+                                --SetPedToRagdollWithFall(ped, 1500, 2000, 1, GetEntityForwardVector(ped), 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
                             end
                         else
                             if chance <= Config.LegInjuryChance.Walking then
                                 ShakeGameplayCam('SMALL_EXPLOSION_SHAKE', 0.08) -- change this float to increase/decrease camera shake
-                                SetPedToRagdollWithFall(ped, 1500, 2000, 1, GetEntityForwardVector(ped), 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
+                                --SetPedToRagdollWithFall(ped, 1500, 2000, 1, GetEntityForwardVector(ped), 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
                             end
                         end
                     end
@@ -591,7 +591,8 @@ RegisterNetEvent('hospital:client:Revive', function()
         SetEntityInvincible(player, true)
         canLeaveBed = true
     end
-
+    local netPed = PedToNet(PlayerPedId())
+    TriggerServerEvent("qb-cnr:toggleDead", netPed, false)
     TriggerServerEvent("hospital:server:RestoreWeaponDamage")
     SetEntityMaxHealth(player, 200)
     SetEntityHealth(player, 200)
@@ -691,6 +692,7 @@ RegisterNetEvent('hospital:client:RespawnAtHospital', function()
             TriggerEvent("prison:client:UnjailPersonToHospital")
             TriggerServerEvent("qb-clothes:loadPlayerSkin")
             Wait(2500)
+            local netPed = PedToNet(PlayerPedId())
             TriggerServerEvent("qb-cnr:toggleDead", netPed, false)
             TriggerServerEvent("hospital:server:RespawnAtHospital") 
            

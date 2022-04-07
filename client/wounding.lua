@@ -173,7 +173,7 @@ CreateThread(function()
 
                                 if not IsPedRagdoll(player) and IsPedOnFoot(player) and not IsPedSwimming(player) then
                                     ShakeGameplayCam('SMALL_EXPLOSION_SHAKE', 0.08) -- change this float to increase/decrease camera shake
-                                    SetPedToRagdollWithFall(player, 7500, 9000, 1, GetEntityForwardVector(player), 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
+                                   -- SetPedToRagdollWithFall(player, 7500, 9000, 1, GetEntityForwardVector(player), 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
                                 end
 
                                 Wait(1500)
