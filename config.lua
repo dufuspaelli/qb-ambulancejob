@@ -1,6 +1,6 @@
 Config = {}
 
-Config.UseTarget = GetConvar('UseTarget', false)
+Config.UseTarget = false
 
 Config.MinimalDoctors = 2
 Config.WipeInventoryOnRespawn = false
@@ -51,6 +51,13 @@ Config.Locations = {
     },
     ["stations"] = {
         [1] = {label = Lang:t('info.pb_hospital'), coords = vector4(304.27, -600.33, 43.28, 272.249)}
+    }, 
+    ["respawns"] = {
+        [1] = vector4(295.54, -1448.65, 29.97, 315.25),
+        [2] = vector4(-497.61, -336.07, 34.5, 278.51),
+        [3] = vector4(1155.47, -1547.73, 34.84, 263.68),
+        [4] = vector4(-676.98, 312.31, 83.08, 174.77),
+        [5] = vector4(-874.98, -307.86, 39.57, 336.43)
     }
 }
 

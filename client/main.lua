@@ -680,9 +680,19 @@ RegisterNetEvent('hospital:client:RespawnAtHospital', function()
             TriggerServerEvent("qb-clothes:loadPlayerSkin")
             Wait(2500)
             local netPed = PedToNet(PlayerPedId())
-            TriggerServerEvent("qb-cnr:toggleDead", netPed, false)
-            TriggerServerEvent("hospital:server:RespawnAtHospital") 
-           
+            --TriggerServerEvent("qb-cnr:toggleDead", netPed, false)
+            --TriggerServerEvent("hospital:server:RespawnAtHospital") 
+            DoScreenFadeOut(1000)
+
+            while not IsScreenFadedOut() do
+                Wait(100)
+            end
+            TriggerEvent('hospital:client:Revive', -1)
+            local spawnPoint = Config.Locations["respawns"][math.floor(math.random(1,5))]
+            print(spawnPoint)
+            SetEntityCoords(PlayerPedId(), spawnPoint.x, spawnPoint.y, spawnPoint.z + 0.02)
+            SetEntityHeading(PlayerPedId(), spawnPoint.w)
+            DoScreenFadeIn(1000)
         end
 	end)
    -- TriggerEvent("police:client:DeEscort")
