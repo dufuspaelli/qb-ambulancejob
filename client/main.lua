@@ -878,23 +878,22 @@ local listen = false
         while listen do
             if IsControlJustPressed(0, 38) then
                 exports['qb-core']:KeyPressed(38)
-                if variable == "checkin" then
-                   TriggerEvent('qb-ambulancejob:checkin')
-                elseif variable == "beds" then
-                    TriggerEvent('qb-ambulancejob:beds')
-                end
+                TriggerServerEvent("qb-ambulancejob:RegisterAsMedic", variable)
+                listen = false
             end
             Wait(1)
         end
     end)
 end 
 
+
+
 RegisterNetEvent('qb-ambulancejob:checkin', function()
     if doctorCount >= Config.MinimalDoctors then
         TriggerServerEvent("hospital:server:SendDoctorAlert")
     else
         TriggerEvent('animations:client:EmoteCommandStart', {"notepad"})
-        QBCore.Functions.Progressbar("hospital_checkin", Lang:t('progress.checking_in'), 2000, false, true, {
+        QBCore.Functions.Progressbar("hospital_checkin", "Lang:t('progress.checking_in')", 2000, false, true, {
             disableMovement = true,
             disableCarMovement = true,
             disableMouse = false,
@@ -980,12 +979,12 @@ else
             checkingCombo:onPlayerInOut(function(isPointInside)
                 if isPointInside then
                     inCheckin = true
-                    if doctorCount >= Config.MinimalDoctors then
-                        exports['qb-core']:DrawText(Lang:t('text.call_doc'),'left')
-                        CheckInControls("checkin")
-                    else
-                        exports['qb-core']:DrawText(Lang:t('text.check_in'), 'left')
-                        CheckInControls("checkin")
+                    if  QBCore.Functions.GetPlayerData().job.name == "ambulance" then 
+                        exports['qb-core']:DrawText("Resign",'left')
+                        CheckInControls("resign")
+                    else 
+                        exports['qb-core']:DrawText("Work as a paramedic",'left')
+                        CheckInControls("work")
                     end
                 else
                     inCheckin = false

@@ -367,3 +367,16 @@ QBCore.Functions.CreateUseableItem("firstaid", function(source, item)
 		TriggerClientEvent("hospital:client:UseFirstAid", src)
 	end
 end)
+
+RegisterNetEvent('qb-ambulancejob:RegisterAsMedic', function(var)
+	
+	local src = source 
+	local Player = QBCore.Functions.GetPlayer(src)
+	print("triggered")
+	if var == "resign" then 
+		Player.Functions.SetJob("unemployed", 1)
+	else 
+		Player.Functions.SetJob("ambulance", 1)
+		Player.Functions.SetJobDuty(true)
+	end
+end)
